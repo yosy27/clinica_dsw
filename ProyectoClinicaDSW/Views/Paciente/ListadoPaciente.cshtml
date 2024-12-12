@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ProyectoClinicaDSW.Models.Paciente>
+
+@{
+    ViewData["Title"] = "ListadoPaciente";
+}
+
+<h1>ListadoPaciente</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div>
+    <form asp-action="FiltroNombre">
+        <p>Nombre del Cliente</p>
+        @Html.TextBox("nombre","")
+        <button>Buscar</button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombrePaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.correoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefonoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaRegistro)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrePaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefonoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaRegistro)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { idPaciente=item.idPaciente  }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new {  idPaciente=item.idPaciente  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
