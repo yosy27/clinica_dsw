@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoClinicaDSW.Models
 {
@@ -8,7 +9,7 @@ namespace ProyectoClinicaDSW.Models
         public int? idUsuario { get; set; }
 
         [Required, Display(Name = "Nombre")]
-        public string? nombreUsuario { get; set; }
+        public string? Nombre { get; set; } 
 
         [Required, Display(Name = "Correo")]
         public string? correoUsuario { get; set; }
@@ -16,9 +17,8 @@ namespace ProyectoClinicaDSW.Models
         [Required, Display(Name = "Contraseña")]
         public string? clave { get; set; }
 
-        [Required, Display(Name = "Rol")]
-        public int? idRol { get; set; }
+        [NotMapped]
+        public bool MantenerActivo { get; set; }
 
-        
     }
 }

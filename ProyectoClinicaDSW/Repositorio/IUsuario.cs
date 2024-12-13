@@ -1,4 +1,5 @@
-﻿using ProyectoClinicaDSW.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoClinicaDSW.Models;
 
 namespace ProyectoClinicaDSW.Repositorio
 {
@@ -6,10 +7,7 @@ namespace ProyectoClinicaDSW.Repositorio
     {
         IEnumerable<Usuario> ListaUsuario();
         string RegistrarUsuario(Usuario usu);
-
-
-
-
+        Task<Usuario?> Login(Usuario usu);
 
 
     }
