@@ -20,13 +20,15 @@ namespace ProyectoClinicaDSW.Controllers
             return View();
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> Login(Usuario usu)
         {
             if (usu == null || string.IsNullOrEmpty(usu.correoUsuario) || string.IsNullOrEmpty(usu.clave))
             {
                 return BadRequest("Por favor, proporciona las credenciales completas.");
             }
+
+            usu.MantenerActivo = Request.Form["MantenerActivo"] == "on";
 
             try
             {
@@ -51,16 +53,16 @@ namespace ProyectoClinicaDSW.Controllers
                 {
                     IsPersistent = usu.MantenerActivo,
                     ExpiresUtc = usu.MantenerActivo
-                        ? DateTimeOffset.UtcNow.AddDays(1)
-                        : DateTimeOffset.UtcNow.AddMinutes(30)
+                        ? DateTimeOffset.UtcNow.AddMinutes(30)
+                        : DateTimeOffset.UtcNow.AddSeconds(10)
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
 
-                // Usar TempData para el mensaje de éxito
+             
                 TempData["Success"] = "Inicio de sesión exitoso!";
 
-                // Redirige al Index de la vista Home
+             
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

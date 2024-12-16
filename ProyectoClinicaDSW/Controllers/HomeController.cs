@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoClinicaDSW.Models;
@@ -15,6 +17,12 @@ namespace ProyectoClinicaDSW.Controllers
             _logger = logger;
         }
 
+        
+        public async Task<IActionResult> Salir()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Usuario");
+        }
         
 
         public IActionResult Index()
