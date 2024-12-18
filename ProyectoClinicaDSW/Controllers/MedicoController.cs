@@ -10,9 +10,11 @@ namespace ProyectoClinicaDSW.Controllers
     {
         IMedico _Med;
         IEspecialidad _Esp;
+        IDiaSemana _Dia;
 
         public MedicoController()
         {
+            _Dia = new DiaSemanaSQL();
             _Med = new MedicoSQL();
             _Esp = new EspecialidadSQL();
 
