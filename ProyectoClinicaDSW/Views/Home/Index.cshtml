@@ -1,8 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@section Scripts {
+    <script>
+        // Verifica si hay mensajes de error o éxito en TempData y muestra los SweetAlert
+        @if (TempData["Error"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'error',
+                    title: 'Oops...',
+                    text: '@Html.Raw(TempData["Error"] as string)'  // Usar Html.Raw para evitar el escape de caracteres
+                            });
+            </text>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                    title: '¡Éxito!',
+                    text: '@Html.Raw(TempData["Success"] as string)'  // Usar Html.Raw para evitar el escape de caracteres
+                            }).then((result) => {
+                                // Redirige a la página de inicio después de un inicio de sesión exitoso
+                                if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("Index", "Home")';
+                                }
+                            });
+            </text>
+        }
+    </script>
+}
+

@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoClinicaDSW.Models;
 using System.Diagnostics;
 
 namespace ProyectoClinicaDSW.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,10 +17,20 @@ namespace ProyectoClinicaDSW.Controllers
             _logger = logger;
         }
 
+        
+        public async Task<IActionResult> Salir()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Usuario");
+        }
+        
+
         public IActionResult Index()
         {
             return View();
         }
+        
+        
 
         public IActionResult Privacy()
         {
