@@ -16,7 +16,13 @@ namespace ProyectoClinicaDSW.Models
         [Required, Display(Name = "Id Día")]
         public int idDia { get; set; }
 
+        [Required, Display(Name = "Nombre Día")]
+        public string nombreDia { get; set; }
+
         [Required, Display(Name = "Id Médico")]
         public int idMedico { get; set; }
+
+        [Required, Display(Name = "Nombre Médico")]
+        public string nombreMedico { get; set; }
     }
 }

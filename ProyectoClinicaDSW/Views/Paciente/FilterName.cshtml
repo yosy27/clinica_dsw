@@ -9,7 +9,7 @@
 <div>
     <form asp-action="FilterName">
         <p>Nombre del Cliente</p>
-        @Html.TextBox("nombre","")
+        @Html.TextBox("inicial","")
         <button>Buscar</button>
     </form>
 </div>
@@ -69,9 +69,9 @@
                 @Html.DisplayFor(modelItem => item.fechaRegistro)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Edit", "Edit", new { idPaciente = item.idPaciente }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Delete", "Delete", new { idPaciente = item.idPaciente })
             </td>
         </tr>
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using ProyectoClinicaDSW.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
 
 namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 {
@@ -28,7 +30,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 
                     cmd.Parameters.AddWithValue("@IDMEDICO", med.idMedico);
                     cmd.Parameters.AddWithValue("@NOMBRE", med.nombreMedico);
-                    cmd.Parameters.AddWithValue("@APELLIDO", med.apellidoMedico);
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
                     cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
                     cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);   
@@ -36,8 +37,8 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0
-                        ? $"Se ha actualizado {i} paciente correctamente."
-                        : "Error al actualizar el paciente.";
+                        ? $"Se ha actualizado {i} medico correctamente."
+                        : "Error al actualizar el medico.";
                 }
                 catch (SqlException ex)
                 {
@@ -84,14 +85,14 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return mensaje;
         }
 
-        public IEnumerable<Medico> FilterName(string nombre)
+        public IEnumerable<Medico> FilterMedico(string inicial)
         {
             List<Medico> temp = new List<Medico>();
             using (SqlConnection cn = new SqlConnection(_sql))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("exec usp_filter_medico @NOMBRE", cn);
-                cmd.Parameters.AddWithValue("@NOMBRE", nombre);
+                SqlCommand cmd = new SqlCommand("usp_get_medicoandfilter @INICIAL", cn);
+                cmd.Parameters.AddWithValue("@INICIAL", inicial +"%");
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())
@@ -100,10 +101,9 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     {
                         idMedico = r.GetInt32(0),
                         nombreMedico = r.GetString(1),
-                        apellidoMedico = r.GetString(2),
-                        dni = r.GetString(3),
-                        idEspecialidad = r.GetInt32(4),
-                        contacto = r.GetString(5)
+                        dni = r.GetString(2),
+                        idEspecialidad = r.GetInt32(3),
+                        contacto = r.GetString(4)
                     });
                 }
                 r.Close();
@@ -126,10 +126,9 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     {
                         idMedico = r.GetInt32(0),
                         nombreMedico = r.GetString(1),
-                        apellidoMedico = r.GetString(2),
-                        dni = r.GetString(3),
-                        idEspecialidad = r.GetInt32(4),
-                        contacto = r.GetString(5)
+                        dni = r.GetString(2),
+                        idEspecialidad = r.GetInt32(3),
+                        contacto = r.GetString(4)
                     });
                 }
                 r.Close();
@@ -151,7 +150,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@NOMBRE", med.nombreMedico);
-                    cmd.Parameters.AddWithValue("@APELLIDO", med.apellidoMedico);
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
                     cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
                     cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);

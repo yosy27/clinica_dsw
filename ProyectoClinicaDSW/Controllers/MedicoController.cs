@@ -17,9 +17,9 @@ namespace ProyectoClinicaDSW.Controllers
             _Esp = new EspecialidadSQL();
 
         }
-        public async Task<IActionResult> ListadoMedico()
+        public async Task<IActionResult> FilterMedico(string inicial)
         {
-            return View(await Task.Run(() => _Med.ListaMedico()));
+            return View(await Task.Run(() => _Med.FilterMedico(inicial)));
         }
 
         #region Registrar
@@ -38,7 +38,7 @@ namespace ProyectoClinicaDSW.Controllers
             }
             ViewBag.mensaje = _Med.RegistrarMedico(med);
 
-            ViewBag.especialidades = new SelectList(_Esp.ListaEspecialidades 
+            ViewBag.especialidades = new SelectList(_Esp.ListaEspecialidades
                 (), "idEspecialidad", "nombreEspecialidad", med.idEspecialidad);
             return View(await Task.Run(() => med));
         }
@@ -50,14 +50,14 @@ namespace ProyectoClinicaDSW.Controllers
         {
             if (idMedico == null)
             {
-                return RedirectToAction("ListadoMedico"); 
+                return RedirectToAction("FilterMedico");
             }
 
             Medico med = await Task.Run(() => _Med.ListaMedico().FirstOrDefault(p => p.idMedico == idMedico));
 
             if (med == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             ViewBag.especialidades = new SelectList(
@@ -81,7 +81,7 @@ namespace ProyectoClinicaDSW.Controllers
                     med.idEspecialidad
                 );
 
-                return View(med); 
+                return View(med);
             }
 
             string mensaje = await Task.Run(() => _Med.ActualizarMedico(med));
@@ -90,7 +90,7 @@ namespace ProyectoClinicaDSW.Controllers
 
             if (mensaje.Contains("actualizado"))
             {
-                return RedirectToAction("ListadoMedico");
+                return RedirectToAction("FilterMedico");
             }
 
             ViewBag.especialidades = new SelectList(
@@ -108,17 +108,13 @@ namespace ProyectoClinicaDSW.Controllers
 
         public async Task<IActionResult> Delete(int? idMedico)
         {
-            if (idMedico == null) return RedirectToAction("ListadoMedico");
+            if (idMedico == null) return RedirectToAction("FilterMedico");
 
             ViewBag.mensaje = _Med.EliminarMedico(idMedico.Value);
-            return RedirectToAction("ListadoMedico");
+            return RedirectToAction("FilterMedico");
         }
         #endregion
 
-        public async Task<IActionResult> FiltroMedico(string nombre = "")
-        {
-            return View(await Task.Run(() => _Med.FilterName(nombre)));
-        }
 
     }
 }

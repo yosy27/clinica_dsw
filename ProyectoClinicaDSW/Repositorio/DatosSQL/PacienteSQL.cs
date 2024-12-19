@@ -93,7 +93,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("usp_get_pacienteandfilter @INICIAL", cn);
-                cmd.Parameters.AddWithValue("@INICIAL", inicial ?? string.Empty);
+                cmd.Parameters.AddWithValue("@INICIAL", inicial +  "%" );
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())

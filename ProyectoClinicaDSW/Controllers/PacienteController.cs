@@ -56,7 +56,7 @@ namespace ProyectoClinicaDSW.Controllers
             {
                 ViewBag.mensaje = await Task.Run(() => _Pac.ActualizarPaciente(pac));
 
-                return RedirectToAction("ListadoPaciente"); 
+                return RedirectToAction("FilterName"); 
             }
 
             return View(pac);
@@ -68,10 +68,10 @@ namespace ProyectoClinicaDSW.Controllers
 
         public async Task<IActionResult> Delete(int? idPaciente)
         {
-            if (idPaciente == null) return RedirectToAction("ListadoPaciente");
+            if (idPaciente == null) return RedirectToAction("FilterName");
 
             ViewBag.mensaje = _Pac.EliminarPaciente(idPaciente.Value);
-            return RedirectToAction("ListadoPaciente");
+            return RedirectToAction("FilterName");
         }
         #endregion
 

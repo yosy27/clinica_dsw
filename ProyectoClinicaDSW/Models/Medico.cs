@@ -7,13 +7,9 @@ namespace ProyectoClinicaDSW.Models
         [Required, Display(Name = "Id Médico")]
         public int? idMedico { get; set; }
 
-        [Display(Name = "Nombres")]
+        [Display(Name = "Nombre Completo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo requerido")]
         public string? nombreMedico { get; set; }
-
-        [Display(Name = "Apellidos")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo requerido")]
-        public string? apellidoMedico { get; set; }
 
         [Display(Name = "DNI")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo requerido")]
@@ -26,6 +22,7 @@ namespace ProyectoClinicaDSW.Models
         [Display(Name = "Contacto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo requerido")]
         public string? contacto { get; set; }
-    
+
+
     }
 }
