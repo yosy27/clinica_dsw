@@ -7,7 +7,7 @@ namespace ProyectoClinicaDSW.Repositorio
         IEnumerable<HorarioMedico> ListaHorarioMedico();
         string RegistrarHorario(HorarioMedico hor);
 
-        string ActualizarMedico(HorarioMedico hor);
+        string ActualizarHorario(HorarioMedico hor);
 
         string EliminarHorario(int idHorarioMedico);
 

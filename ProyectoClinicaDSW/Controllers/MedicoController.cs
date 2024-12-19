@@ -46,7 +46,7 @@ namespace ProyectoClinicaDSW.Controllers
 
         #region Actualizar
 
-        public async Task<IActionResult> Edit(int? idMedico = null)
+        public async Task<IActionResult> Edit(int idMedico)
         {
             if (idMedico == null)
             {

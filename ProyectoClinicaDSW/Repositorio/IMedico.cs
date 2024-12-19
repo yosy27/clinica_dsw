@@ -13,5 +13,7 @@ namespace ProyectoClinicaDSW.Repositorio
         string EliminarMedico(int idMedico);
 
         IEnumerable<Medico> FilterMedico(string inicial);
+
+        IEnumerable<Medico> ListMedicoCb();
     }
 }

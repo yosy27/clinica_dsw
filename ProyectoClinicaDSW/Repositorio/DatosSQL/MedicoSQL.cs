@@ -136,6 +136,28 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return temp;
         }
 
+        public IEnumerable<Medico> ListMedicoCb()
+        {
+            List<Medico> temp = new List<Medico>();
+            using (SqlConnection cn = new SqlConnection(_sql))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("usp_listar_medicos", cn);
+                SqlDataReader r = cmd.ExecuteReader();
+
+                while (r.Read())
+                {
+                    temp.Add(new Medico()
+                    {
+                        idMedico = r.GetInt32(0),
+                        nombreMedico = r.GetString(1)
+                    });
+                }
+                r.Close();
+            }
+            return temp;
+        }
+
         public string RegistrarMedico(Medico med)
         {
             string mensaje = "";

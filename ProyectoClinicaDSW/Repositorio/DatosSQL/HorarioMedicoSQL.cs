@@ -14,7 +14,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
               .GetConnectionString("cnx");
         }
 
-        public string ActualizarMedico(HorarioMedico hor)
+        public string ActualizarHorario(HorarioMedico hor)
         {
             string mensaje = "";
 
@@ -32,7 +32,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     cmd.Parameters.AddWithValue("@HORAFIN", hor.horaFin);
                     cmd.Parameters.AddWithValue("@IDDIA", hor.idDia);
                     cmd.Parameters.AddWithValue("@IDMEDICO", hor.idMedico);
-      
+
 
                     int i = cmd.ExecuteNonQuery();
 
@@ -62,7 +62,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                 {
                     cn.Open();
 
-                    SqlCommand cmd = new SqlCommand("usp_delete_medico", cn);
+                    SqlCommand cmd = new SqlCommand("usp_delete_horario", cn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@IDHORARIO", idHorarioMedico);
@@ -128,10 +128,11 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     temp.Add(new HorarioMedico()
                     {
                         idHorarioMedico = r.GetInt32(0),
-                        idMedico = r.GetInt32(1),
-                        horaInicio = r.GetTimeSpan(2),
-                        horaFin = r.GetTimeSpan(3),
-                        idDia = r.GetInt32(4)
+                        horaInicio = r.GetTimeSpan(1),
+                        horaFin = r.GetTimeSpan(2),
+                        idDia = r.GetInt32(3),
+                        idMedico = r.GetInt32(4),
+
                     });
                 }
                 r.Close();
@@ -162,8 +163,8 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0
-                        ? $"Se ha actualizado {i} paciente correctamente."
-                        : "Error al actualizar el paciente.";
+                        ? $"Se ha insertado {i} horario correctamente."
+                        : "Error al insertar el paciente.";
                 }
                 catch (SqlException ex)
                 {
