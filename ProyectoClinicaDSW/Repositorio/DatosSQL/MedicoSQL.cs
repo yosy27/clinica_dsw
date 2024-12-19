@@ -31,9 +31,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     cmd.Parameters.AddWithValue("@APELLIDO", med.apellidoMedico);
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
                     cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
-                    cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);
-                    cmd.Parameters.AddWithValue("@HORARIOATENCION", med.horario);
-   
+                    cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);   
 
                     int i = cmd.ExecuteNonQuery();
 
@@ -105,8 +103,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                         apellidoMedico = r.GetString(2),
                         dni = r.GetString(3),
                         idEspecialidad = r.GetInt32(4),
-                        contacto = r.GetString(5),
-                        horario = r.GetString(6)
+                        contacto = r.GetString(5)
                     });
                 }
                 r.Close();
@@ -132,9 +129,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                         apellidoMedico = r.GetString(2),
                         dni = r.GetString(3),
                         idEspecialidad = r.GetInt32(4),
-                        contacto = r.GetString(5),
-                        horario = r.GetString(6)
-
+                        contacto = r.GetString(5)
                     });
                 }
                 r.Close();
@@ -160,7 +155,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
                     cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
                     cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);
-                    cmd.Parameters.AddWithValue("@HORARIOATENCION", med.horario);
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0

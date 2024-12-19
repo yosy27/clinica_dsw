@@ -3,42 +3,45 @@ using ProyectoClinicaDSW.Models;
 
 namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 {
-    public class HorarioSQL : IHorario
+    public class HorarioMedicoSQL : IHorarioMedico
     {
         private readonly string _sql;
 
-        public HorarioSQL()
+        public HorarioMedicoSQL()
         {
             _sql = new ConfigurationBuilder().AddJsonFile("appsettings.json")
               .Build()
               .GetConnectionString("cnx");
         }
-        public IEnumerable<Horario> ListaHorario()
+
+        public IEnumerable<HorarioMedico> ListaHorarioMedico()
         {
-            List<Horario> temp = new List<Horario>();
+            List<HorarioMedico> temp = new List<HorarioMedico>();
             using (SqlConnection cn = new SqlConnection(_sql))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("u", cn);
+                SqlCommand cmd = new SqlCommand("usp_ListHorarioMedico", cn);
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())
                 {
-                    temp.Add(new Horario()
+                    temp.Add(new HorarioMedico()
                     {
-                        idHorario = r.GetInt32(0),
-                        IdDia = r.GetInt32(1),
+                        idHorarioMedico = r.GetInt32(0),
+                        idMedico = r.GetInt32(1),
                         horaInicio = r.GetTimeSpan(2),
-                        horaFin = r.GetTimeSpan(3)
-
+                        horaFin = r.GetTimeSpan(3),
+                        idDia = r.GetInt32(4)
                     });
                 }
                 r.Close();
             }
+
             return temp;
         }
+    
 
-        public string RegistrarHorario(Horario hor)
+        public string RegistrarHorario(HorarioMedico hor)
         {
             string mensaje = "";
 
@@ -48,17 +51,20 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                 {
                     cn.Open();
 
-                    SqlCommand cmd = new SqlCommand("usp_insert_horario", cn);
+                    SqlCommand cmd = new SqlCommand("usp_insert_horario_medico", cn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@DIAID", hor.IdDia);
-                    cmd.Parameters.AddWithValue("@HORAINICIO", hor.horaInicio);
-                    cmd.Parameters.AddWithValue("@HORARIOFIN", hor.horaFin);
+                    cmd.Parameters.AddWithValue("@IDPACIENTE", hor.idHorarioMedico);
+                    cmd.Parameters.AddWithValue("@APELLIDO", hor.horaInicio);
+                    cmd.Parameters.AddWithValue("@CORREO", hor.horaFin);
+                    cmd.Parameters.AddWithValue("@TELEFONO", hor.idMedico);
+                    cmd.Parameters.AddWithValue("@DNI", hor.idDia);
+
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0
-                        ? $"Se ha insertado {i} horario correctamente."
-                        : "No se pudo insertar el médico.";
+                        ? $"Se ha actualizado {i} paciente correctamente."
+                        : "Error al actualizar el paciente.";
                 }
                 catch (SqlException ex)
                 {

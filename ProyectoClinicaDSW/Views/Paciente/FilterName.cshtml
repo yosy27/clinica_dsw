@@ -1,23 +1,22 @@
 ﻿@model IEnumerable<ProyectoClinicaDSW.Models.Paciente>
 
 @{
-    ViewData["Title"] = "ListadoPaciente";
+    ViewData["Title"] = "FilterName";
 }
 
-<h1>ListadoPaciente</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>FilterName</h1>
 
 <div>
-    <form asp-action="FiltroNombre">
+    <form asp-action="FilterName">
         <p>Nombre del Cliente</p>
         @Html.TextBox("nombre","")
         <button>Buscar</button>
     </form>
 </div>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -70,9 +69,9 @@
                 @Html.DisplayFor(modelItem => item.fechaRegistro)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { idPaciente=item.idPaciente  }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new {  idPaciente=item.idPaciente  })
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

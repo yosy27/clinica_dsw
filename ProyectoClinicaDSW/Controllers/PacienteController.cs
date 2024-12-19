@@ -15,9 +15,9 @@ namespace ProyectoClinicaDSW.Controllers
             _Pac = new PacienteSQL();
         }
 
-        public async Task<IActionResult> ListadoPaciente()
+        public async Task<IActionResult> FilterName(string inicial)
         {
-            return View(await Task.Run(() => _Pac.ListaPacientes()));
+            return View(await Task.Run(() => _Pac.FilterName(inicial)));
         }
 
         #region Registrar
@@ -75,10 +75,6 @@ namespace ProyectoClinicaDSW.Controllers
         }
         #endregion
 
-        public async Task<IActionResult> FiltroPaciente(string nombre = "")
-        {
-            return View(await Task.Run(() => _Pac.FilterName(nombre)));
-        }
 
     }
 }

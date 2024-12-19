@@ -26,10 +26,6 @@ namespace ProyectoClinicaDSW.Models
         [Display(Name = "Contacto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo requerido")]
         public string? contacto { get; set; }
-
-        [Display(Name = "Horario de Atención")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo requerido")]
-        public string? horario { get; set; }
-
+    
     }
 }

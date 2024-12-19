@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using ProyectoClinicaDSW.Models;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 {
@@ -85,14 +86,14 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return mensaje;
         }
 
-        public IEnumerable<Paciente> FilterName(string nombre)
+        public IEnumerable<Paciente> FilterName(string inicial)
         {
             List<Paciente> temp = new List<Paciente>();
             using (SqlConnection cn = new SqlConnection(_sql))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("exec usp_filter_name @NOMBRE", cn);
-                cmd.Parameters.AddWithValue("@NOMBRE", nombre);
+                SqlCommand cmd = new SqlCommand("usp_get_pacienteandfilter @INICIAL", cn);
+                cmd.Parameters.AddWithValue("@INICIAL", inicial ?? string.Empty);
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())
@@ -119,7 +120,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             using (SqlConnection cn = new SqlConnection(_sql))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("usp_get_pacientes", cn);
+                SqlCommand cmd = new SqlCommand("usp_get_paciente", cn);
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())
@@ -140,7 +141,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             }
             return temp;
         }
-
 
         public string RegistrarPaciente(Paciente pac)
         {
