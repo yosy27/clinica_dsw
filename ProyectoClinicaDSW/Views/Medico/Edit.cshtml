@@ -4,51 +4,63 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center mb-4">Editar Médico</h1>
 
-<h4>MedicoEdit</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="idMedico" class="control-label"></label>
-                <input asp-for="idMedico" class="form-control" />
-                <span asp-validation-for="idMedico" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Formulario de Edición de Médico</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="idMedico" class="control-label">ID del Médico</label>
+                            <input asp-for="idMedico" class="form-control" readonly />
+                            <span asp-validation-for="idMedico" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="nombreMedico" class="control-label">Nombre del Médico</label>
+                            <input asp-for="nombreMedico" class="form-control" placeholder="Ingresa el nombre completo del médico" />
+                            <span asp-validation-for="nombreMedico" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="dni" class="control-label">DNI</label>
+                            <input asp-for="dni" class="form-control" placeholder="DNI del médico" />
+                            <span asp-validation-for="dni" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="contacto" class="control-label">Contacto</label>
+                            <input asp-for="contacto" class="form-control" placeholder="Número de contacto del médico" />
+                            <span asp-validation-for="contacto" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="idEspecialidad" class="control-label">Especialidad</label>
+                            <select asp-for="idEspecialidad" class="form-control" asp-items="ViewBag.especialidades">
+                                <option value="">Seleccione una especialidad</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between mt-4">
+                            <input type="submit" value="Guardar Cambios" class="btn btn-success me-2" />
+                            <a asp-action="FilterMedico" class="btn btn-secondary">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="nombreMedico" class="control-label"></label>
-                <input asp-for="nombreMedico" class="form-control" />
-                <span asp-validation-for="nombreMedico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="dni" class="control-label"></label>
-                <input asp-for="dni" class="form-control" />
-                <span asp-validation-for="dni" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="contacto" class="control-label"></label>
-                <input asp-for="contacto" class="form-control" />
-                <span asp-validation-for="contacto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="idEspecialidad" class="control-label"></label>
-                <select asp-for="idEspecialidad" class="form-control" asp-items="ViewBag.especialidades">
-                    <option value="">Seleccione</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
