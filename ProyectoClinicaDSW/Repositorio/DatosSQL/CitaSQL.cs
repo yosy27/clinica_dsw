@@ -13,41 +13,10 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
               .Build()
               .GetConnectionString("cnx");
         }
-        public string ActualizarCita(Cita cit)
+
+        public string EliminarCita(int idCita)
         {
-            string mensaje = "";
-
-            using (SqlConnection cn = new SqlConnection(_sql))
-            {
-                try
-                {
-                    cn.Open();
-
-                    SqlCommand cmd = new SqlCommand("usp_update_cita", cn);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@IDCITA", cit.idCita);
-                    cmd.Parameters.AddWithValue("@IDPACIENTE", cit.idPaciente);
-                    cmd.Parameters.AddWithValue("@IDMEDICO", cit.idMedico);
-                    cmd.Parameters.AddWithValue("@FECHAHORA", cit.fechaHora);
-                    cmd.Parameters.AddWithValue("@IDESTADO", cit.idEstado);
-
-                    int i = cmd.ExecuteNonQuery();
-
-                    mensaje = i > 0
-                        ? $"Se ha actualizado {i} cita correctamente."
-                        : "Error al actualizar la cita.";
-                }
-                catch (SqlException ex)
-                {
-                    mensaje = $"Error SQL: {ex.Message}";
-                }
-                finally
-                {
-                    cn.Close();
-                }
-            }
-            return mensaje;
+            throw new NotImplementedException();
         }
 
         public string EliminarCitaint(int idCita)
@@ -83,18 +52,14 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return mensaje;
         }
 
-        public IEnumerable<Cita> FilterCita(string inicial)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Cita> ListaCita()
+        public IEnumerable<Cita> FilterCita(string dni)
         {
             List<Cita> temp = new List<Cita>();
             using (SqlConnection cn = new SqlConnection(_sql))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("usp_get_cita", cn);
+                SqlCommand cmd = new SqlCommand("usp_get_citasyfilter @DNI", cn);
+                cmd.Parameters.AddWithValue("@DNI", dni + "%");
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())
@@ -102,10 +67,13 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     temp.Add(new Cita()
                     {
                         idCita = r.GetInt32(0),
-                        idPaciente = r.GetInt32(1),
-                        idMedico = r.GetInt32(2),
-                        fechaHora = r.GetDateTime(3),
-                        idEstado = r.GetInt32(4)
+                        nombreCita = r.GetString(1),
+                        dniPaciente = r.GetString(2),
+                        idPaciente = r.GetInt32(3),
+                        idMedico = r.GetInt32(4),
+                        fechaHora = r.GetDateTime(5),
+                        idEstado = r.GetInt32(6),
+                        nombreEstado = r.GetString(7)
                     });
                 }
                 r.Close();
@@ -123,18 +91,18 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                 {
                     cn.Open();
 
-                    SqlCommand cmd = new SqlCommand("usp_insert_medico", cn);
+                    SqlCommand cmd = new SqlCommand("usp_insert_cita", cn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@NOMBRE", med.nombreMedico);
-                    cmd.Parameters.AddWithValue("@DNI", med.dni);
-                    cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
-                    cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);
+                    cmd.Parameters.AddWithValue("@IDPACIENTE", cit.idPaciente);
+                    cmd.Parameters.AddWithValue("@IDMEDICO", cit.idMedico);
+                    cmd.Parameters.AddWithValue("@FECHAHORA", cit.fechaHora);
+                    cmd.Parameters.AddWithValue("@IDESTADO", cit.idEstado);
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0
-                        ? $"Se ha insertado {i} médico correctamente."
-                        : "No se pudo insertar el médico.";
+                        ? $"Se ha registrado {i} cita correctamente."
+                        : "No se pudo insertar la cita.";
                 }
                 catch (SqlException ex)
                 {

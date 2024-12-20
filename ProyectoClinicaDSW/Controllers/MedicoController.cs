@@ -60,12 +60,7 @@ namespace ProyectoClinicaDSW.Controllers
                 return NotFound();
             }
 
-            ViewBag.especialidades = new SelectList(
-                _Esp.ListaEspecialidades(),
-                "idEspecialidad",
-                "nombreEspecialidad",
-                med.idEspecialidad
-            );
+            ViewBag.especialidades = new SelectList(_Esp.ListaEspecialidades(),"idEspecialidad","nombreEspecialidad");
             return View(med);
         }
 
@@ -75,15 +70,12 @@ namespace ProyectoClinicaDSW.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.especialidades = new SelectList(
-                    _Esp.ListaEspecialidades(),
-                    "idEspecialidad",
-                    "nombreEspecialidad",
-                    med.idEspecialidad
-                );
+                    _Esp.ListaEspecialidades(),"idEspecialidad", "nombreEspecialidad");
 
                 return View(med);
             }
 
+ 
             string mensaje = await Task.Run(() => _Med.ActualizarMedico(med));
 
             ViewBag.mensaje = mensaje;
@@ -96,8 +88,7 @@ namespace ProyectoClinicaDSW.Controllers
             ViewBag.especialidades = new SelectList(
                 _Esp.ListaEspecialidades(),
                 "idEspecialidad",
-                "nombreEspecialidad",
-                med.idEspecialidad
+                "nombreEspecialidad"
             );
 
             return View(med);

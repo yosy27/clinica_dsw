@@ -28,7 +28,7 @@ namespace ProyectoClinicaDSW.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.dias = new SelectList(_Dia.ListaDiaSemana(), "idDia", "nombreDia");
-            ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico");
+            ViewBag.medicos = new SelectList(_Med.ListMedicoCb(), "idMedico", "nombreMedico");
             return View(await Task.Run(() => new HorarioMedico()));
         }
 
@@ -38,12 +38,12 @@ namespace ProyectoClinicaDSW.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.dias = new SelectList(_Dia.ListaDiaSemana(), "idDia", "nombreDia");
-                ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico");
+                ViewBag.medicos = new SelectList(_Med.ListMedicoCb(), "idMedico", "nombreMedico");
             }
             ViewBag.mensaje = _Hor.RegistrarHorario(hor);
 
             ViewBag.dias = new SelectList(_Dia.ListaDiaSemana(), "idDia", "nombreDia");
-            ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico");
+            ViewBag.medicos = new SelectList(_Med.ListMedicoCb(), "idMedico", "nombreMedico");
             return View(await Task.Run(() => hor));
         }
         #endregion

@@ -2,8 +2,8 @@
 {
     public class Especialidad
     {
-        public int? idEspecialidad { get; set; }
-        public string? nombreEspecialidad { get; set; }
+        public int idEspecialidad { get; set; }
+        public string nombreEspecialidad { get; set; }
 
     }
 }

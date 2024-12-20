@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ProyectoClinicaDSW.Models.Cita>
+
+@{
+    ViewData["Title"] = "FilterCita";
+}
+
+<h1>FilterCita</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idCita)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreCita)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.idPaciente)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.nombrePaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dniPaciente)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.idMedico)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.nombreMedico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaHora)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.idEstado)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.nombreEstado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCita)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreCita)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.idPaciente)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrePaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dniPaciente)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.idMedico)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreMedico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaHora)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.idEstado)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreEstado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

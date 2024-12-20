@@ -2,6 +2,7 @@
 using ProyectoClinicaDSW.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System;
+using System.Data;
 
 namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 {
@@ -15,6 +16,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
               .Build()
               .GetConnectionString("cnx");
         }
+
         public string ActualizarMedico(Medico med)
         {
             string mensaje = "";
@@ -28,11 +30,13 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     SqlCommand cmd = new SqlCommand("usp_update_medico", cn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
+
+                    // Usar Add para definir el tipo de dato explícitamente
                     cmd.Parameters.AddWithValue("@IDMEDICO", med.idMedico);
                     cmd.Parameters.AddWithValue("@NOMBRE", med.nombreMedico);
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
+                    cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);
                     cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
-                    cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);   
 
                     int i = cmd.ExecuteNonQuery();
 
@@ -102,8 +106,9 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                         idMedico = r.GetInt32(0),
                         nombreMedico = r.GetString(1),
                         dni = r.GetString(2),
-                        idEspecialidad = r.GetInt32(3),
-                        contacto = r.GetString(4)
+                        contacto = r.GetString(3),
+                        idEspecialidad = r.GetInt32(4),
+                        nombreEspecialidad = r.GetString(5)
                     });
                 }
                 r.Close();
@@ -127,8 +132,8 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                         idMedico = r.GetInt32(0),
                         nombreMedico = r.GetString(1),
                         dni = r.GetString(2),
-                        idEspecialidad = r.GetInt32(3),
-                        contacto = r.GetString(4)
+                        contacto = r.GetString(3),
+                        idEspecialidad = r.GetInt32(4)
                     });
                 }
                 r.Close();
@@ -173,8 +178,9 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 
                     cmd.Parameters.AddWithValue("@NOMBRE", med.nombreMedico);
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
-                    cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
                     cmd.Parameters.AddWithValue("@CONTACTO", med.contacto);
+                    cmd.Parameters.AddWithValue("@IDESPECIALIDAD", med.idEspecialidad);
+                   
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0

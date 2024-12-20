@@ -8,7 +8,7 @@
 
 <div>
     <form asp-action="FilterMedico">
-        <p>Nombre del Cliente</p>
+        <p>Nombre del Médico</p>
         @Html.TextBox("inicial", "")
         <button>Buscar</button>
     </form>
@@ -29,10 +29,13 @@
                 @Html.DisplayNameFor(model => model.dni)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.idEspecialidad)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.contacto)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.idEspecialidad)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.nombreEspecialidad)
             </th>
             <th></th>
         </tr>
@@ -50,13 +53,16 @@
                 @Html.DisplayFor(modelItem => item.dni)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.idEspecialidad)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.contacto)
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.idEspecialidad)
+            </td>*@
             <td>
-                    @Html.ActionLink("Edit", "Edit", new {  idMedico=item.idMedico  }) |
+                @Html.DisplayFor(modelItem => item.nombreEspecialidad)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { idMedico = item.idMedico }) |
                     @Html.ActionLink("Delete", "Delete", new { idMedico = item.idMedico })
             </td>
         </tr>
