@@ -14,43 +14,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
               .GetConnectionString("cnx");
         }
 
-        public string ActualizarHorario(HorarioMedico hor)
-        {
-            string mensaje = "";
-
-            using (SqlConnection cn = new SqlConnection(_sql))
-            {
-                try
-                {
-                    cn.Open();
-
-                    SqlCommand cmd = new SqlCommand("usp_update_horario_medico", cn);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@IDHORARIO", hor.idHorarioMedico);
-                    cmd.Parameters.AddWithValue("@HORAINICIO", hor.horaInicio);
-                    cmd.Parameters.AddWithValue("@HORAFIN", hor.horaFin);
-                    cmd.Parameters.AddWithValue("@IDDIA", hor.idDia);
-                    cmd.Parameters.AddWithValue("@IDMEDICO", hor.idMedico);
-
-
-                    int i = cmd.ExecuteNonQuery();
-
-                    mensaje = i > 0
-                        ? $"Se ha actualizado {i} paciente correctamente."
-                        : "Error al actualizar el paciente.";
-                }
-                catch (SqlException ex)
-                {
-                    mensaje = $"Error SQL: {ex.Message}";
-                }
-                finally
-                {
-                    cn.Close();
-                }
-            }
-            return mensaje;
-        }
 
         public string EliminarHorario(int idHorarioMedico)
         {

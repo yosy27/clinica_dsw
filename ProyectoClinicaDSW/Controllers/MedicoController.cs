@@ -48,34 +48,56 @@ namespace ProyectoClinicaDSW.Controllers
 
         public async Task<IActionResult> Edit(int idMedico)
         {
-            if (idMedico == null)
+            if (idMedico == 0)
             {
                 return RedirectToAction("FilterMedico");
             }
 
-            Medico med = await Task.Run(() => _Med.ListaMedico().FirstOrDefault(p => p.idMedico == idMedico));
+            Medico med = await Task.Run(() =>
+                _Med.ListaMedico().FirstOrDefault(p => p.idMedico == idMedico)
+            );
 
             if (med == null)
             {
                 return NotFound();
             }
 
-            ViewBag.especialidades = new SelectList(_Esp.ListaEspecialidades(),"idEspecialidad","nombreEspecialidad");
-            return View(med);
+            MedicoEdit medEdit = new MedicoEdit
+            {
+                idMedico = med.idMedico,
+                nombreMedico = med.nombreMedico,
+                dni = med.dni,
+                contacto = med.contacto,
+                idEspecialidad = med.idEspecialidad
+            };
+
+            ViewBag.especialidades = new SelectList(
+                _Esp.ListaEspecialidades(), "idEspecialidad", "nombreEspecialidad"
+            );
+
+            return View(medEdit);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Medico med)
+        public async Task<IActionResult> Edit(MedicoEdit medEdit)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.especialidades = new SelectList(
-                    _Esp.ListaEspecialidades(),"idEspecialidad", "nombreEspecialidad");
-
-                return View(med);
+                    _Esp.ListaEspecialidades(), "idEspecialidad", "nombreEspecialidad"
+                );
+                return View(medEdit);
             }
 
- 
+            Medico med = new Medico
+            {
+                idMedico = medEdit.idMedico,
+                nombreMedico = medEdit.nombreMedico,
+                dni = medEdit.dni,
+                contacto = medEdit.contacto,
+                idEspecialidad = medEdit.idEspecialidad
+            };
+
             string mensaje = await Task.Run(() => _Med.ActualizarMedico(med));
 
             ViewBag.mensaje = mensaje;
@@ -86,12 +108,10 @@ namespace ProyectoClinicaDSW.Controllers
             }
 
             ViewBag.especialidades = new SelectList(
-                _Esp.ListaEspecialidades(),
-                "idEspecialidad",
-                "nombreEspecialidad"
+                _Esp.ListaEspecialidades(), "idEspecialidad", "nombreEspecialidad"
             );
 
-            return View(med);
+            return View(medEdit);
         }
         #endregion
 
