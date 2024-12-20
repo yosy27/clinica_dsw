@@ -95,6 +95,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@IDPACIENTE", cit.idPaciente);
+                    cmd.Parameters.AddWithValue("@NOMCITA",cit.nombreCita);
                     cmd.Parameters.AddWithValue("@IDMEDICO", cit.idMedico);
                     cmd.Parameters.AddWithValue("@FECHAHORA", cit.fechaHora);
                     cmd.Parameters.AddWithValue("@IDESTADO", cit.idEstado);

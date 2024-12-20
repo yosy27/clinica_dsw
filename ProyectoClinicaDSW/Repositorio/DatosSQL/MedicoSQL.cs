@@ -55,6 +55,8 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return mensaje;
         }
 
+
+
         public string EliminarMedico(int idMedico)
         {
             string mensaje = "";

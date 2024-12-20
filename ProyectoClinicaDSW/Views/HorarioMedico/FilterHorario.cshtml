@@ -28,15 +28,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.horaFin)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.idDia)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.nombreDia)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.idMedico)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.nombreMedico)
             </th>
@@ -68,7 +68,6 @@
                 @Html.DisplayFor(modelItem => item.nombreMedico)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { idHorarioMedico = item.idHorarioMedico }) |
                     @Html.ActionLink("Delete", "Delete", new { idHorarioMedico = item.idHorarioMedico })
             </td>
         </tr>

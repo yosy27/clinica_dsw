@@ -50,57 +50,6 @@ namespace ProyectoClinicaDSW.Controllers
         }
         #endregion
 
-        #region Actualizar
-
-        public async Task<IActionResult> Edit(int idHorarioMedico)
-        {
-            if (idHorarioMedico == null)
-            {
-                return RedirectToAction("FilterHorario");
-            }
-
-            HorarioMedico hor = await Task.Run(() => _Hor.ListaHorarioMedico().FirstOrDefault(p => p.idHorarioMedico == idHorarioMedico));
-
-            if (hor == null)
-            {
-                return NotFound();
-            }
-
-            ViewBag.dias = new SelectList(_Dia.ListaDiaSemana(), "idDia", "nombreDia");
-            ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico"
-            );
-            return View(hor);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(HorarioMedico hor)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.dias = new SelectList(_Dia.ListaDiaSemana(), "idDia", "nombreDia");
-                ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico"
-                );
-
-                return View(hor);
-            }
-
-            string mensaje = await Task.Run(() => _Hor.ActualizarHorario(hor));
-
-            ViewBag.mensaje = mensaje;
-
-            if (mensaje.Contains("actualizado"))
-            {
-                return RedirectToAction("FilterHorario");
-            }
-
-            ViewBag.dias = new SelectList(_Dia.ListaDiaSemana(), "idDia", "nombreDia");
-            ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico"
-            );
-
-            return View(hor);
-        }
-        #endregion
-
         #region Eliminar
 
         public async Task<IActionResult> Delete(int? idHorarioMedico)
