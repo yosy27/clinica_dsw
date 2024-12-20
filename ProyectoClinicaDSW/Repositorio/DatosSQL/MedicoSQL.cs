@@ -31,7 +31,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
 
-                    // Usar Add para definir el tipo de dato explícitamente
                     cmd.Parameters.AddWithValue("@IDMEDICO", med.idMedico);
                     cmd.Parameters.AddWithValue("@NOMBRE", med.nombreMedico);
                     cmd.Parameters.AddWithValue("@DNI", med.dni);
