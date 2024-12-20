@@ -3,9 +3,11 @@ using ProyectoClinicaDSW.Repositorio.DatosSQL;
 using ProyectoClinicaDSW.Repositorio;
 using ProyectoClinicaDSW.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProyectoClinicaDSW.Controllers
 {
+    [Authorize]
     public class MedicoController : Controller
     {
         IMedico _Med;

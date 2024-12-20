@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoClinicaDSW.Repositorio;
 using ProyectoClinicaDSW.Repositorio.DatosSQL;
 
 namespace ProyectoClinicaDSW.Controllers
 {
+    [Authorize]
     public class CitaController : Controller
     {
         IMedico _Med;

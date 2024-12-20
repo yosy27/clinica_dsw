@@ -70,7 +70,7 @@ body {
 
 /* Main content area */
 .main-content {
-    margin-left: 250px;
+    margin-left: 400px; /* Ajuste para que no se sobreponga al sidebar */
     padding: 40px;
     flex: 1;
     overflow-y: auto;
@@ -95,11 +95,11 @@ p {
 /* Responsive */
 @media screen and (max-width: 768px) {
     .sidebar {
-        width: 200px;
+        width: 250px; /* Ajustamos el ancho del sidebar */
     }
 
     .main-content {
-        margin-left: 200px;
+        margin-left: 250px; /* Ajuste para pantallas medianas */
     }
 }
 
@@ -111,7 +111,7 @@ p {
     }
 
     .main-content {
-        margin-left: 0;
+        margin-left: 0; /* Sin margen cuando el sidebar se apile en pantallas pequeñas */
     }
 
     .sidebar-menu {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoClinicaDSW.Models;
 using ProyectoClinicaDSW.Repositorio;
@@ -6,6 +7,7 @@ using ProyectoClinicaDSW.Repositorio.DatosSQL;
 
 namespace ProyectoClinicaDSW.Controllers
 {
+    [Authorize]
     public class PacienteController : Controller
     {
         IPaciente _Pac;

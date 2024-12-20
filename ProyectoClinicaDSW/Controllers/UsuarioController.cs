@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProyectoClinicaDSW.Models;
 using ProyectoClinicaDSW.Repositorio;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProyectoClinicaDSW.Controllers
 {
+    
     public class UsuarioController : Controller
     {
         private readonly IUsuario _usuarioRepositorio;
@@ -36,7 +38,8 @@ namespace ProyectoClinicaDSW.Controllers
 
                 if (user == null)
                 {
-                    TempData["Error"] = "Credenciales incorrectas o cuenta no registrada."; // Error para mostrar en la vista
+                    TempData["Error"] = "Credenciales incorrectas o cuenta no registrada."; 
+                                                                                            
                     return View();
                 }
 
@@ -54,7 +57,7 @@ namespace ProyectoClinicaDSW.Controllers
                     IsPersistent = usu.MantenerActivo,
                     ExpiresUtc = usu.MantenerActivo
                         ? DateTimeOffset.UtcNow.AddMinutes(30)
-                        : DateTimeOffset.UtcNow.AddSeconds(10)
+                        : DateTimeOffset.UtcNow.AddMinutes(10)
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);

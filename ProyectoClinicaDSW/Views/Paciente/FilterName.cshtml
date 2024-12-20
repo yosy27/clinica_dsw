@@ -4,75 +4,95 @@
     ViewData["Title"] = "FilterName";
 }
 
-<h1>FilterName</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
 
-<div>
-    <form asp-action="FilterName">
-        <p>Nombre del Cliente</p>
-        @Html.TextBox("inicial","")
-        <button>Buscar</button>
-    </form>
-</div>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/jquery.dataTables.min.css">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idPaciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombrePaciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.apellidoPaciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.correoPaciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.telefonoPaciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaRegistro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.idPaciente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombrePaciente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.apellidoPaciente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.correoPaciente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefonoPaciente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaRegistro)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { idPaciente = item.idPaciente }) |
-                    @Html.ActionLink("Delete", "Delete", new { idPaciente = item.idPaciente })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Listado de Paciente</h1>
+
+
+        <div class ="mb-3">
+            <form asp-action="FilterName" class="d-flex">
+                @Html.TextBox("inicial", "", new { @class = "form-control me-2", placeholder = "Ingrese el nombre de un cliente" })
+
+                <button class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+
+        <p>
+            <a asp-action="Create" class="btn btn-success">Registrar nuevo paciente</a>
+        </p>
+
+        <table id="pacientesTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.idPaciente)</th>
+                    <th>@Html.DisplayNameFor(model => model.nombrePaciente)</th>
+                    <th>@Html.DisplayNameFor(model => model.apellidoPaciente)</th>
+                    <th>@Html.DisplayNameFor(model => model.correoPaciente)</th>
+                    <th>@Html.DisplayNameFor(model => model.telefonoPaciente)</th>
+                    <th>@Html.DisplayNameFor(model => model.dni)</th>
+                    <th>@Html.DisplayNameFor(model => model.fechaRegistro)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.idPaciente)</td>
+                        <td>@Html.DisplayFor(modelItem => item.nombrePaciente)</td>
+                        <td>@Html.DisplayFor(modelItem => item.apellidoPaciente)</td>
+                        <td>@Html.DisplayFor(modelItem => item.correoPaciente)</td>
+                        <td>@Html.DisplayFor(modelItem => item.telefonoPaciente)</td>
+                        <td>@Html.DisplayFor(modelItem => item.dni)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fechaRegistro)</td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-primary me-2">
+                                    @Html.ActionLink("Editar", "Edit", new { idPaciente = item.idPaciente }, new { @class = "text-white" })
+                                </button>
+                                <button class="btn btn-danger">
+                                    @Html.ActionLink("Eliminar", "Delete", new { idPaciente = item.idPaciente }, new { @class = "text-white" })
+                                </button>
+                            </div>
+                        </td>
+
+                    
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.datatables.net/2.0.0/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#pacientesTable').DataTable({
+                dom: 't', // Solo muestra la tabla, sin controles de búsqueda o registros
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

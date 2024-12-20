@@ -3,9 +3,11 @@ using ProyectoClinicaDSW.Repositorio.DatosSQL;
 using ProyectoClinicaDSW.Repositorio;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoClinicaDSW.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProyectoClinicaDSW.Controllers
 {
+    [Authorize]
     public class HorarioMedicoController : Controller
     {
         IHorarioMedico _Hor;
