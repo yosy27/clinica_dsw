@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Inicio";
 }
 
@@ -15,7 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css" rel="stylesheet" />
 
     <style>
-        /* Eliminar fondo azul del banner */
         #banner {
             background-color: transparent;
             color: #007bff;
@@ -24,19 +21,11 @@
             margin-bottom: 40px;
         }
 
-        /* Imágenes de tamaño uniforme */
         .card-img-top {
             height: 200px;
             object-fit: cover;
         }
 
-        /* Imagen de dermatología más grande */
-        #dermatologia .img-fluid {
-            max-height: 400px; /* Ajusta la altura de la imagen */
-            object-fit: cover; /* Mantiene la proporción de la imagen */
-        }
-
-        /* Asegura que todas las cards tengan el mismo tamaño */
         .card {
             display: flex;
             flex-direction: column;
@@ -44,11 +33,11 @@
         }
 
         .card-body {
-            flex-grow: 1; /* Permite que el contenido de la card ocupe el espacio restante */
+            flex-grow: 1;
         }
 
-        .card img {
-            height: 200px;
+        .specialty-img {
+            max-height: 400px;
             object-fit: cover;
         }
     </style>
@@ -57,25 +46,43 @@
 
     <div id="banner" class="container-fluid text-center py-5">
         <h1>Bienvenidos a la Clínica XYZ</h1>
-        <p>¡Tu salud, nuestra prioridad! Te ayudamos a cuidar lo más importante.</p>
-        <a href="#dermatologia" class="btn btn-light btn-lg">Ver Servicios de Dermatología</a>
+        <p>Tu salud, nuestra prioridad. Contamos con especialistas en diversas áreas médicas.</p>
+        <a href="#especialidades" class="btn btn-light btn-lg">Conocer Especialidades</a>
     </div>
 
-    <div id="dermatologia" class="container my-5">
+    <div id="especialidades" class="container my-5">
+        <h2 class="text-center">Nuestras Especialidades</h2>
         <div class="row">
-            <div class="col-md-6">
-                <h2>Servicios de Dermatología</h2>
-                <p>Ofrecemos una amplia gama de tratamientos dermatológicos para la salud de tu piel. Nuestro equipo de especialistas te brindará atención personalizada.</p>
-                <ul>
-                    <li>Tratamientos para acné</li>
-                    <li>Rejuvenecimiento facial</li>
-                    <li>Detección temprana de cáncer de piel</li>
-                    <li>Tratamientos para manchas y cicatrices</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Solicitar Cita</a>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/img/cardiologia.jpg" class="card-img-top" alt="Cardiología" />
+                   
+                    <div class="card-body">
+                        <h5 class="card-title">Cardiología</h5>
+                        <p class="card-text">Cuidamos la salud de tu corazón con tecnología de punta y especialistas altamente capacitados.</p>
+                        <a href="#" class="btn btn-primary">Más Información</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <img src="~/img/dermatologia.jpg" class="img-fluid" alt="Dermatología" />
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/img/pediatria.jpg" class="card-img-top" alt="Pediatría" />
+                    <div class="card-body">
+                        <h5 class="card-title">Pediatría</h5>
+                        <p class="card-text">Brindamos atención integral para los más pequeños con un enfoque cálido y profesional.</p>
+                        <a href="#" class="btn btn-primary">Más Información</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/img/traumatologia.jpg" class="card-img-top" alt="Traumatología" />
+                    <div class="card-body">
+                        <h5 class="card-title">Traumatología</h5>
+                        <p class="card-text">Tratamos lesiones y problemas óseos con atención personalizada y tratamientos innovadores.</p>
+                        <a href="#" class="btn btn-primary">Más Información</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,30 +92,33 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="~/img/promoción1.jpg" class="card-img-top" alt="Promoción 1" />
+
+                    <img src="~/img/chequeo-cardiologico.jpg" class="card-img-top" alt="Promoción 1" />
                     <div class="card-body">
-                        <h5 class="card-title">Descuento en Consultas Dermatológicas</h5>
-                        <p class="card-text">Obtén un 20% de descuento en tu primera consulta dermatológica. Solo por tiempo limitado.</p>
+                        <h5 class="card-title">Chequeo Cardiológico</h5>
+                        <p class="card-text">Obtén un descuento en tu chequeo cardiológico completo. Solo por tiempo limitado.</p>
                         <a href="#" class="btn btn-primary">Ver Detalles</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="~/img/promoción2.jpg" class="card-img-top" alt="Promoción 2" />
+
+                    <img src="~/img/consulta-gratis.jpg" class="card-img-top" alt="Promoción 2" />
                     <div class="card-body">
-                        <h5 class="card-title">Evaluación de Piel Gratis</h5>
-                        <p class="card-text">Realiza una evaluación de tu piel de forma gratuita con nuestros dermatólogos expertos.</p>
-                        <a href="#" class="btn btn-primary">Solicitar Evaluación</a>
+                        <h5 class="card-title">Consulta Pediátrica Gratis</h5>
+                        <p class="card-text">Trae a tus hijos para una evaluación médica gratuita con nuestros pediatras expertos.</p>
+                        <a href="#" class="btn btn-primary">Solicitar Consulta</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="~/img/promoción3.png" class="card-img-top" alt="Promoción 3" />
+
+                    <img src="~/img/rehabilitacion.jpg" class="card-img-top" alt="Promoción 3" />
                     <div class="card-body">
-                        <h5 class="card-title">Tratamientos Anti-envejecimiento</h5>
-                        <p class="card-text">Obtén una consulta de valoración para tratamientos anti-envejecimiento con un 15% de descuento.</p>
+                        <h5 class="card-title">Rehabilitación Física</h5>
+                        <p class="card-text">Aprovecha un 15% de descuento en sesiones de rehabilitación física para lesiones óseas.</p>
                         <a href="#" class="btn btn-primary">Más Información</a>
                     </div>
                 </div>
@@ -120,25 +130,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.js"></script>
     <script>
-
         @if (TempData["Success"] != null)
         {
             <text>
                     Swal.fire({
                         icon: 'success',
                     title: '¡Éxito!',
-                    text: '@Html.Raw(TempData["Success"] as string)'  // Usar Html.Raw para evitar el escape de caracteres
-                                        }).then((result) => {
-                                            // Redirige a la página de inicio después de un inicio de sesión exitoso
-                                            if (result.isConfirmed) {
+                    text: '@Html.Raw(TempData["Success"] as string)'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
                         window.location.href = '@Url.Action("Index", "Home")';
-                                            }
-                                        });
+                                }
+                            });
             </text>
         }
     </script>
 
 </body>
 </html>
-
-
