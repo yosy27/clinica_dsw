@@ -61,10 +61,9 @@
                                 <button class="btn btn-primary me-2">
                                     @Html.ActionLink("Editar", "Edit", new { idPaciente = item.idPaciente }, new { @class = "text-white" })
                                 </button>
-                                    <form asp-action="Delete" asp-route-idPaciente="@item.idPaciente" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
-
+                                <button class="btn btn-danger">
+                                    @Html.ActionLink("Eliminar", "Delete", new { idPaciente = item.idPaciente }, new { @class = "text-white" })
+                                </button>
                             </div>
                         </td>
 

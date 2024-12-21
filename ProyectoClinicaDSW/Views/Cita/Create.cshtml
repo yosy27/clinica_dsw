@@ -6,9 +6,8 @@
 
 <h1>Registrar Cita</h1>
 
-<h4>Cita</h4>
 <hr />
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
@@ -54,9 +53,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 <div>
     @ViewBag.mensaje
 </div>
