@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using ProyectoClinicaDSW.Models;
+using System.Data;
 
 namespace ProyectoClinicaDSW.Repositorio.DatosSQL
 {
@@ -15,11 +16,6 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
         }
 
         public string EliminarCita(int idCita)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string EliminarCitaint(int idCita)
         {
             string mensaje = "";
 
@@ -52,14 +48,14 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return mensaje;
         }
 
-        public IEnumerable<Cita> FilterCita(string dni)
+        public IEnumerable<Cita> FilterCita(string nombre)
         {
             List<Cita> temp = new List<Cita>();
             using (SqlConnection cn = new SqlConnection(_sql))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("usp_get_citasyfilter @DNI", cn);
-                cmd.Parameters.AddWithValue("@DNI", dni + "%");
+                SqlCommand cmd = new SqlCommand("usp_get_citayfilter @NOMBRE", cn);
+                cmd.Parameters.AddWithValue("@NOMBRE", nombre + "%");
                 SqlDataReader r = cmd.ExecuteReader();
 
                 while (r.Read())
@@ -68,12 +64,14 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     {
                         idCita = r.GetInt32(0),
                         nombreCita = r.GetString(1),
-                        dniPaciente = r.GetString(2),
-                        idPaciente = r.GetInt32(3),
-                        idMedico = r.GetInt32(4),
-                        fechaHora = r.GetDateTime(5),
-                        idEstado = r.GetInt32(6),
-                        nombreEstado = r.GetString(7)
+                        idPaciente = r.GetInt32(2),
+                        dniPaciente = r.GetString(3),
+                        nombrePaciente = r.GetString(4),
+                        idMedico = r.GetInt32(5),
+                        nombreMedico = r.GetString(6),
+                        fechaHora = r.GetDateTime(7),
+                        idEstado = r.GetInt32(8),
+                        nombreEstado = r.GetString(9)
                     });
                 }
                 r.Close();
@@ -81,7 +79,7 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
             return temp;
         }
 
-        public string RegistrarCita(Cita cit)
+        public string RegistrarCita(CitaReg citReg)
         {
             string mensaje = "";
 
@@ -94,11 +92,11 @@ namespace ProyectoClinicaDSW.Repositorio.DatosSQL
                     SqlCommand cmd = new SqlCommand("usp_insert_cita", cn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@IDPACIENTE", cit.idPaciente);
-                    cmd.Parameters.AddWithValue("@NOMCITA",cit.nombreCita);
-                    cmd.Parameters.AddWithValue("@IDMEDICO", cit.idMedico);
-                    cmd.Parameters.AddWithValue("@FECHAHORA", cit.fechaHora);
-                    cmd.Parameters.AddWithValue("@IDESTADO", cit.idEstado);
+                    cmd.Parameters.AddWithValue("@IDPACIENTE", citReg.idPaciente);
+                    cmd.Parameters.AddWithValue("@NOMCITA", citReg.nombreCita);
+                    cmd.Parameters.AddWithValue("@IDMEDICO", citReg.idMedico);
+                    cmd.Parameters.AddWithValue("@FECHAHORA", citReg.fechaHora);
+                    cmd.Parameters.AddWithValue("@IDESTADO", citReg.idEstado);
                     int i = cmd.ExecuteNonQuery();
 
                     mensaje = i > 0

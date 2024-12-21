@@ -20,9 +20,9 @@ namespace ProyectoClinicaDSW.Controllers
             _Cit = new CitaSQL();
         }
 
-        public async Task<IActionResult> FilterCita(string dni)
+        public async Task<IActionResult> FilterCita(string nombre)
         {
-            return View(await Task.Run(() => _Cit.FilterCita(dni)));
+            return View (await Task.Run(() => _Cit.FilterCita(nombre)));
         }
 
 
@@ -30,26 +30,37 @@ namespace ProyectoClinicaDSW.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.pacientes = new SelectList(_Pac.ListaPacientes(), "idPaciente", "nombrePaciente");
-            ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico");
+            ViewBag.medicos = new SelectList(_Med.ListMedicoCb(), "idMedico", "nombreMedico");
             ViewBag.estados = new SelectList(_Est.ListaEstados(), "idEstado", "nombreEstado");
-            return View(await Task.Run(() => new Cita()));
+            return View(await Task.Run(() => new CitaReg()));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Cita cit)
+        public async Task<IActionResult> Create(CitaReg citReg)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.pacientes = new SelectList(_Pac.ListaPacientes(), "idPaciente", "nombrePaciente");
-                ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico");
+                ViewBag.medicos = new SelectList(_Med.ListMedicoCb(), "idMedico", "nombreMedico");
                 ViewBag.estados = new SelectList(_Est.ListaEstados(), "idEstado", "nombreEstado");
             }
-            ViewBag.mensaje = _Cit.RegistrarCita(cit);
+            ViewBag.mensaje = _Cit.RegistrarCita(citReg);
 
             ViewBag.pacientes = new SelectList(_Pac.ListaPacientes(), "idPaciente", "nombrePaciente");
-            ViewBag.medicos = new SelectList(_Med.ListaMedico(), "idMedico", "nombreMedico");
+            ViewBag.medicos = new SelectList(_Med.ListMedicoCb(), "idMedico", "nombreMedico");
             ViewBag.estados = new SelectList(_Est.ListaEstados(), "idEstado", "nombreEstado");
-            return View(await Task.Run(() => cit));
+            return View(await Task.Run(() => citReg));
+        }
+        #endregion
+
+        #region Eliminar
+
+        public async Task<IActionResult> Delete(int? idCita)
+        {
+            if (idCita == null) return RedirectToAction("FilterCita");
+
+            ViewBag.mensaje = _Med.EliminarMedico(idCita.Value);
+            return RedirectToAction("FilterCita");
         }
         #endregion
 

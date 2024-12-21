@@ -9,6 +9,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div>
+    <form asp-action="FilterCita">
+        <p>Nombre de paciente</p>
+        @Html.TextBox("nombre", "")
+        <button>Buscar</button>
+    </form>
+</div>
+
+
+
 <table class="table">
     <thead>
         <tr>
@@ -78,10 +89,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.nombreEstado)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+                <form asp-action="Delete" asp-route-idPaciente="@item.idPaciente" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+
         </tr>
 }
     </tbody>

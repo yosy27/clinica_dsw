@@ -4,12 +4,10 @@ namespace ProyectoClinicaDSW.Repositorio
 {
     public interface ICita
     {
+        string RegistrarCita(CitaReg citReg);
+        string EliminarCita(int idCita);
 
-        string RegistrarCita(Cita cit);
-
-        string EliminarCita (int idCita);
-
-        IEnumerable<Cita> FilterCita(string dni);
+        IEnumerable<Cita> FilterCita(string nombre);
 
     }
 }
