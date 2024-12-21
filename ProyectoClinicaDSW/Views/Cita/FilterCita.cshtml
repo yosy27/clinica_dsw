@@ -55,9 +55,7 @@
                         <td>@Html.DisplayFor(modelItem => item.nombreEstado)</td>
                         <td>
                             <div class="d-flex">
-                                <button class="btn btn-primary me-2">
-                                    @Html.ActionLink("Editar", "Edit", new { idCita = item.idCita }, new { @class = "text-white" })
-                                </button>
+                               
                                 <button class="btn btn-danger">
                                     @Html.ActionLink("Eliminar", "Delete", new { idCita = item.idCita }, new { @class = "text-white" })
                                 </button>
