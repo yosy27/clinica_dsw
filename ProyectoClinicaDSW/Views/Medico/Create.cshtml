@@ -4,59 +4,55 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="mb-4">Registrar Médico</h1>
 
-<h4>Medico</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="idMedico" class="control-label"></label>
-                <input asp-for="idMedico" class="form-control" />
-                <span asp-validation-for="idMedico" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="nombreMedico" class="control-label"></label>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="nombreMedico" class="control-label">Nombre del Médico</label>
                 <input asp-for="nombreMedico" class="form-control" />
                 <span asp-validation-for="nombreMedico" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="dni" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="dni" class="control-label">DNI</label>
                 <input asp-for="dni" class="form-control" />
                 <span asp-validation-for="dni" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="contacto" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="contacto" class="control-label">Contacto</label>
                 <input asp-for="contacto" class="form-control" />
                 <span asp-validation-for="contacto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="idEspecialidad" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="idEspecialidad" class="control-label">Especialidad</label>
                 <select asp-for="idEspecialidad" class="form-control" asp-items="ViewBag.especialidades">
                     <option value="">Seleccione</option>
                 </select>
+                <span asp-validation-for="idEspecialidad" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="nombreEspecialidad" class="control-label"></label>
-                <input asp-for="nombreEspecialidad" class="form-control" />
-                <span asp-validation-for="nombreEspecialidad" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="form-group d-flex justify-content-between">
+                <input type="submit" value="Crear" class="btn btn-primary me-2" />
+                <a asp-action="FilterMedico" class="btn btn-secondary">Regresar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
+<div class="text-center mt-4">
     @ViewBag.mensaje
-</div>
-<div>
-    <a asp-action="FilterMedico">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

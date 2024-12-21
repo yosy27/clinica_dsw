@@ -5,66 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
 
-    <!-- Estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProyectoClinicaDSW.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 
-    <!-- Estilos de DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
 </head>
 <body>
     <div class="wrapper">
-        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-header">
+            <div class="sidebar-header text-center">
                 <h2>Clínica Salud</h2>
+
+                <img src="~/img/pngwing.com.png" alt="Logo Clínica Salud" class="img-fluid my-3" />
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#inicio" class="active">Inicio</a></li>
+              
                 <li>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Paciente" asp-action="FilterName">Gestión de Pacientes</a>
+                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index" style="text-decoration: none;">Inicio</a>
                 </li>
-                <li><a class="nav-link text-dark" asp-area="" asp-controller="Medico" asp-action="FilterMedico">Gestión Medicos</a></li>
-                <li><a class="nav-link text-dark" asp-area="" asp-controller="Cita" asp-action="FilterCita">Gestión de Citas</a></li>
+                <li>
+                    <a class="nav-link text-white" asp-area="" asp-controller="Paciente" asp-action="FilterName" style="text-decoration: none;">Gestión de Pacientes</a>
+                </li>
+                <li><a class="nav-link text-white" asp-area="" asp-controller="Medico" asp-action="FilterMedico" style="text-decoration: none;">Gestión Medicos</a></li>
+                <li><a class="nav-link text-white" asp-area="" asp-controller="Cita" asp-action="FilterCita" style="text-decoration: none;">Gestión de Citas</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Salir">Cerrar Sesión</a>
+                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Salir" style="text-decoration: none;">Cerrar Sesión</a>
                 </li>
             </ul>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             @RenderBody()
         </main>
     </div>
 
-    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-    <!-- Scripts de Bootstrap (sin Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-    <!-- Scripts de DataTables -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Scripts personalizados -->
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 
-    <!-- Inicialización de DataTables -->
     <script>
         $(document).ready(function () {
-            // Aplica DataTables a todas las tablas con la clase 'table-datatable'
             $('.table-datatable').DataTable({
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
